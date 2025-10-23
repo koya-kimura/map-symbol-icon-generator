@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>地図記号アイコン出力ツール</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <span class="brand-title">地図記号アイコン出力ツール</span>
+    </div>
+    <nav id="site-nav" class="site-nav" data-open="false">
+      <a href="index.html" class="nav-link active">アイコン生成</a>
+      <a href="guide.html" class="nav-link">使い方ガイド</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>地図記号アイコン出力ツール</h1>
+    <p class="lead">
+      選択した地図記号カテゴリのアイコンを一括生成し、PNGデータとしてZIP出力できます。
+    </p>
+    <form id="control-form" autocomplete="off">
+      <div class="field-group">
+        <label for="count-input">カテゴリごとの生成枚数 (最大 6000 枚)</label>
+        <input type="number" id="count-input" name="count" min="1" max="6000" value="1000" required />
+      </div>
+      <div class="field-group">
+        <label for="pixel-input">出力ピクセルサイズ (例: 28、100)</label>
+        <input type="number" id="pixel-input" name="pixel" min="8" max="512" value="28" required />
+      </div>
+      <div class="button-row">
+        <button type="submit" id="generate-btn">生成開始＆ZIPダウンロード</button>
+        <button type="button" id="cancel-btn" class="secondary" disabled>生成中断</button>
+      </div>
+    </form>
+
+    <section class="category-section">
+      <div class="section-header">
+        <h2>アイコンカテゴリ</h2>
+        <button type="button" id="refresh-previews" class="secondary" disabled>プレビュー更新</button>
+      </div>
+      <p class="section-note">生成したいカテゴリにチェックを入れてください。各カテゴリのプレビューはランダムに変化します。</p>
+      <div id="category-list" class="category-grid"></div>
+    </section>
+
+    <textarea id="progress" readonly placeholder="進捗状況が表示されます"></textarea>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
