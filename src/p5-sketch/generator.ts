@@ -122,6 +122,9 @@ let currentScale = 1;
 const stroke = (size: number, factor = 0.06) => Math.max(1, (size * factor) / currentScale);
 // vary は値を ±ratio の範囲でランダムに拡大縮小
 const vary = (p: p5, value: number, ratio = 0.1) => value * p.random(1 - ratio, 1 + ratio);
+
+// 外部でも利用できるように helper をまとめて公開 (使用しない場合は無視してOK)
+export const DRAWING_HELPERS = { toPx, jitter, stroke, vary } as const;
 // 回転/スケールのランダム化をまとめて適用する。draw() 内では通常通り描画してOK。
 const applySymbolTransform = (p: p5, g: p5.Graphics, size: number, draw: () => void) => {
   g.push();
@@ -321,44 +324,44 @@ const drawCastleRuins: SymbolDrawer = (p, g, size) => {
 // ============== ここから下は未実装のカテゴリ ==============
 
 // 温泉: 下部の湯船円と 3 本の湯気。steamHeight や wave 係数で湯気の動きが変化。
-const drawHotSpring: SymbolDrawer = (p, g, size) => {
+const drawHotSpring: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 漁港: 旗竿の縦線、上部の小円、下部の円弧、防波堤の腕。
 // bottomRadius/armLength で海側の広がりが調整できます。
-const drawFishingPort: SymbolDrawer = (p, g, size) => {
+const drawFishingPort: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 果樹園: 一つの大きな円と垂直支柱 3 本。spacing や lineBottom で支柱の配置を制御。
-const drawOrchard: SymbolDrawer = (p, g, size) => {
+const drawOrchard: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 広葉樹林: 大きな円冠と幹。trunkTop/trunkBottom を変えて幹の長さを微調整。
-const drawBroadleafForest: SymbolDrawer = (p, g, size) => {
+const drawBroadleafForest: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 針葉樹林: 三角形の樹冠と幹。baseWidth を変えると樹冠の広がりが変わります。
-const drawConiferousForest: SymbolDrawer = (p, g, size) => {
+const drawConiferousForest: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 図書館: 正方形に近い外枠と 2 本の横線。rectW/rectH で書棚の形を変えられます。
-const drawLibrary: SymbolDrawer = (p, g, size) => {
+const drawLibrary: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
 
 // 風車: 縦の塔と 2 枚の羽。towerHeight や angleOffset を調整すると羽の開きが変わる。
-const drawWindmill: SymbolDrawer = (p, g, size) => {
+const drawWindmill: SymbolDrawer = (_p, g, _size) => {
     g.push();
     g.pop();
 };
